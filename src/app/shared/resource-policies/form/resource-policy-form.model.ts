@@ -80,6 +80,7 @@ export const RESOURCE_POLICY_FORM_DESCRIPTION_CONFIG: DsDynamicTextAreaModelConf
   metadataFields: [],
   repeatable: false,
   rows: 10,
+  spellCheck: true,
   submissionId: '',
   hasSelectableMetadata: false
 };

@@ -90,6 +90,7 @@ export class FormatFormComponent implements OnInit {
       name: 'description',
       label: 'admin.registries.bitstream-formats.edit.description.label',
       hint: 'admin.registries.bitstream-formats.edit.description.hint',
+      spellCheck: true,
 
     }),
     new DynamicSelectModel({

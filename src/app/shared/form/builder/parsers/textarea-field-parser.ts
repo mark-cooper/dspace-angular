@@ -20,6 +20,7 @@ export class TextareaFieldParser extends FieldParser {
     };
 
     textAreaModelConfig.rows = 10;
+    textAreaModelConfig.spellCheck = true;
     this.setValues(textAreaModelConfig, fieldValue);
     const textAreaModel = new DsDynamicTextAreaModel(textAreaModelConfig, layout);
 

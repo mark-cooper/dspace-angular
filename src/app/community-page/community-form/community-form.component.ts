@@ -52,18 +52,22 @@ export class CommunityFormComponent extends ComColFormComponent<Community> {
     new DynamicTextAreaModel({
       id: 'description',
       name: 'dc.description',
+      spellCheck: true,
     }),
     new DynamicTextAreaModel({
       id: 'abstract',
       name: 'dc.description.abstract',
+      spellCheck: true,
     }),
     new DynamicTextAreaModel({
       id: 'rights',
       name: 'dc.rights',
+      spellCheck: true,
     }),
     new DynamicTextAreaModel({
       id: 'tableofcontents',
       name: 'dc.description.tableofcontents',
+      spellCheck: true,
     }),
   ];
 

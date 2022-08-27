@@ -194,6 +194,7 @@ export class GroupFormComponent implements OnInit, OnDestroy {
         label: groupDescription,
         name: 'groupDescription',
         required: false,
+        spellCheck: true,
       });
       this.formModel = [
         this.groupName,
