@@ -1,0 +1,33 @@
+# This image will be published as dspace/dspace-angular:$DSPACE_VERSION-build
+# See https://github.com/DSpace/dspace-angular/tree/main/docker for usage details
+
+# Test build:
+# docker build -f Dockerfile.build -t dspace/dspace-angular:dspace-7_x-build .
+
+FROM node:18-alpine as build
+
+# Ensure Python and other build tools are available
+# These are needed to install some node modules, especially on linux/arm64
+RUN apk add --update python3 make g++ && rm -rf /var/cache/apk/*
+
+WORKDIR /app
+COPY package.json yarn.lock ./
+RUN yarn install --network-timeout 300000
+
+ADD . /app/
+RUN yarn build:prod
+
+FROM node:18-alpine
+RUN npm install --global pm2
+
+COPY --chown=node:node --from=build /app/config /app/config
+COPY --chown=node:node --from=build /app/dist /app/dist
+
+WORKDIR /app
+ADD --chown=node:node docker/dspace-ui.json /app/dspace-ui.json
+
+USER node
+ENV NODE_ENV production
+
+EXPOSE 4000
+CMD pm2-runtime start dspace-ui.json --json
