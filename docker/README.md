@@ -6,7 +6,7 @@
 If you wish to run DSpace on Docker in production, we recommend building your own Docker images. You are welcome to borrow ideas/concepts from the below images in doing so. But, the below images should not be used "as is" in any production scenario.
 ***
 
-## 'Dockerfile' in root directory 
+## 'Dockerfile' in root directory
 This Dockerfile is used to build a *development* DSpace 7 Angular UI image, published as 'dspace/dspace-angular'
 
 ```
@@ -19,6 +19,17 @@ Admins to our DockerHub repo can manually publish with the following command.
 ```
 docker push dspace/dspace-angular:dspace-7_x
 ```
+
+The `Dockerfile.demo` is used to build a `demo` image, which extends the development image by generating a *production* build and runtime environment **for demo purposes only** (i.e. deploy the default dspace-angular UI).
+
+```bash
+# build the latest image
+docker build --build-arg DSPACE_VERSION=dspace-7_x -f Dockerfile.demo -t dspace/dspace-angular:dspace-7_x-demo .
+# build the 7.5 release image
+docker build --build-arg DSPACE_VERSION=dspace-7.5 -f Dockerfile.demo -t dspace/dspace-angular:dspace-7.5-demo .
+```
+
+This image is built *automatically*.
 
 ## docker directory
 - docker-compose.yml

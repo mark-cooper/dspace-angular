@@ -1,0 +1,23 @@
+# This image will be published as dspace/dspace-angular:$DSPACE_VERSION-demo
+# See https://github.com/DSpace/dspace-angular/tree/main/docker for usage details
+
+# Test builds ("latest" & release):
+# docker build --build-arg DSPACE_VERSION=dspace-7_x -f Dockerfile.demo -t dspace/dspace-angular:dspace-7_x-demo .
+# docker build --build-arg DSPACE_VERSION=dspace-7.5 -f Dockerfile.demo -t dspace/dspace-angular:dspace-7.5-demo .
+
+ARG DSPACE_VERSION
+FROM dspace/dspace-angular:$DSPACE_VERSION as build
+
+RUN yarn build:prod
+
+FROM node:18-alpine
+COPY --from=build /app/dist /app/dist
+
+ENV NODE_ENV production
+RUN npm install --global pm2
+
+WORKDIR /app
+ADD docker/dspace-ui.json /app/dspace-ui.json
+
+EXPOSE 4000
+CMD pm2-runtime start dspace-ui.json --json
