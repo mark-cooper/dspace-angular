@@ -24,6 +24,7 @@ import { AuthMethodType } from '../../../../core/auth/models/auth.method-type';
 @renderAuthMethodFor(AuthMethodType.Oidc)
 @renderAuthMethodFor(AuthMethodType.Shibboleth)
 @renderAuthMethodFor(AuthMethodType.Orcid)
+@renderAuthMethodFor(AuthMethodType.Saml)
 export class LogInExternalProviderComponent implements OnInit {
 
   /**
